@@ -1,7 +1,7 @@
 FROM dimajix/hadoop:2.7.3
 MAINTAINER k.kupferschmidt@dimajix.de
 
-ARG BUILD_SPARK_VERSION=2.1.0
+ARG BUILD_SPARK_VERSION=2.1.1
 ARG BUILD_ALLUXIO_VERSION=1.4.0
 
 USER root
@@ -18,7 +18,6 @@ ENV SPARK_MASTER_HOST=spark-master \
     SPARK_HOME=/opt/spark \
     SPARK_CONF_DIR=/etc/spark \
     SPARK_DIST_CLASSPATH="$HADOOP_CONF_DIR/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
-ENV PATH=$PATH:${SPARK_HOME}/bin
 
 # Download and install Spark
 RUN curl -sL --retry 3 "http://d3kbcqa49mib13.cloudfront.net/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop.tgz" \
@@ -34,6 +33,8 @@ RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLU
 COPY bin/ /opt/docker/bin/
 COPY libexec/ /opt/docker/libexec/
 COPY conf/spark-defaults.conf ${SPARK_HOME}/conf
+
+ENV PATH=$PATH:${SPARK_HOME}/bin
 
 ENTRYPOINT ["/opt/docker/bin/entrypoint.sh"]
 CMD ["bash"]
