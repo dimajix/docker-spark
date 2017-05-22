@@ -12,10 +12,7 @@ ENV PYTHONHASHSEED=0 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # SPARK
-ENV SPARK_MASTER_HOST=spark-master \
-    SPARK_MASTER_PORT=7077 \
-    SPARK_WEBUI_PORT=8080 \
-    SPARK_HOME=/opt/spark \
+ENV SPARK_HOME=/opt/spark \
     SPARK_CONF_DIR=/etc/spark \
     SPARK_DIST_CLASSPATH="$HADOOP_CONF_DIR/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
 
