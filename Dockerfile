@@ -18,9 +18,9 @@ ENV SPARK_HOME=/opt/spark \
 
 # Download and install Spark
 RUN curl -sL --retry 3 "http://d3kbcqa49mib13.cloudfront.net/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop.tgz" \
-  | tar xz -C /opt \
- && ln -s /opt/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop ${SPARK_HOME} \
- && chown -R root:root $SPARK_HOME
+    | tar xz -C /opt \
+    && ln -s /opt/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop ${SPARK_HOME} \
+    && chown -R root:root $SPARK_HOME
 
 # Download Alluxio Spark client
 RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLUXIO_VERSION}/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar \
@@ -29,7 +29,7 @@ RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLU
 # copy configs and binaries
 COPY bin/ /opt/docker/bin/
 COPY libexec/ /opt/docker/libexec/
-COPY conf/spark-defaults.conf ${SPARK_HOME}/conf
+COPY conf/ /opt/docker/conf/spark/
 
 ENV PATH=$PATH:${SPARK_HOME}/bin
 

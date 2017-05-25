@@ -1,6 +1,16 @@
 # Spark Docker Container
 
+This Docker image provides a Spark standalone cluster together with a client. Actually you can also connect the client
+to a YARN or Mesos cluster, if you provide the appropriate SPARK_MASTER url.
+
+As a special gimmick, this image not only contains Hadoop for accessing files in HDFS, but also Alluxio for caching
+data and accessing data in a federated environment in HDFS, S3 and other locations supported by Alluxio.
+
 # Configuration
+
+You will find two configuration files for use with docker-compose. The first docker-compose.yml contains the setup of
+the containers. The second file docker-compose.env  contains common environment settings used by all containers. This
+seperation helps to come up with a consistent configuration of all ports, hostnames etc for all containers.
 
 ## Spark Cluster Configuration
 

@@ -2,8 +2,7 @@
 set -eo pipefail
 
 # Setup environment
-source /opt/docker/libexec/hadoop-init.sh
-source /opt/docker/libexec/spark-vars.sh
+source /opt/docker/libexec/spark-init.sh
 
 
 start_slave() {
