@@ -23,8 +23,8 @@ RUN curl -sL --retry 3 "http://d3kbcqa49mib13.cloudfront.net/spark-${BUILD_SPARK
     && chown -R root:root $SPARK_HOME
 
 # Download Alluxio Spark client
-RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLUXIO_VERSION}/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar \
-  > /opt/spark/jars/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar
+#RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLUXIO_VERSION}/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar \
+#  > /opt/spark/jars/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar
 
 # copy configs and binaries
 COPY bin/ /opt/docker/bin/
