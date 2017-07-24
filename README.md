@@ -40,7 +40,7 @@ Since many users want to access data stored on AWS S3, it is also possible to sp
 settings.
 
     S3_PROXY_HOST=
-    S3_PROXY_PORT=
+    S3_PROXY_PORT=-1
     S3_PROXY_USE_HTTPS=false
     S3_ENDPOINT=s3.amazonaws.com
     S3_ENDPOINT_HTTP_PORT=80
