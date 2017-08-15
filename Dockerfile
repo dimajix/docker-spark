@@ -1,7 +1,7 @@
-FROM dimajix/hadoop:2.8.0
+FROM dimajix/hadoop:2.8.1
 MAINTAINER k.kupferschmidt@dimajix.de
 
-ARG BUILD_SPARK_VERSION=2.1.1
+ARG BUILD_SPARK_VERSION=2.2.0
 ARG BUILD_ALLUXIO_VERSION=1.5.0
 
 USER root
