@@ -39,10 +39,6 @@ services:
       - 6066:6066
       - 7077:7077
       - 9090:9090
-    external_links:
-      - hadoop-namenode
-      - hadoop-resourcemanager
-      - hadoop-historyserver
 
   spark-slave-1:
     hostname: spark-slave-1
@@ -58,10 +54,6 @@ services:
       - 9090
     ports:
       - 9091:9090
-    external_links:
-      - hadoop-namenode
-      - hadoop-resourcemanager
-      - hadoop-historyserver
 
   spark-slave-2:
     hostname: spark-slave-2
@@ -77,10 +69,6 @@ services:
       - 9090
     ports:
       - 9092:9090
-    external_links:
-      - hadoop-namenode
-      - hadoop-resourcemanager
-      - hadoop-historyserver
 
 networks:
   default:

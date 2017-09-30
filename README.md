@@ -48,3 +48,13 @@ settings.
 
     AWS_ACCESS_KEY_ID=
     AWS_SECRET_ACCESS_KEY=
+
+## Running a Spark Standalone Cluster
+
+The container already contains all components for running a Spark standalone cluster. This can be achieved by using the
+two commands
+    * master
+    * slave
+
+The docker-compose file contains an example of a complete Spark standalone cluster with a Jupyter Notebook as the
+frontend.
