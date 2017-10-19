@@ -9,7 +9,9 @@ USER root
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
 ENV PYTHONHASHSEED=0 \
     PYTHONIOENCODING=UTF-8 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYSPARK_PYTHON=/usr/bin/python3 \
+    PYSPARK_DRIVER_PYTHON=/usr/bin/python3
 
 # SPARK
 ENV SPARK_HOME=/opt/spark \
@@ -25,6 +27,12 @@ RUN curl -sL --retry 3 "http://d3kbcqa49mib13.cloudfront.net/spark-${BUILD_SPARK
 # Download Alluxio Spark client
 #RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLUXIO_VERSION}/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar \
 #  > /opt/spark/jars/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar
+
+# Install Python
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install python3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # copy configs and binaries
 COPY bin/ /opt/docker/bin/
