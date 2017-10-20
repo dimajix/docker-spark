@@ -24,6 +24,27 @@ The following settings configure Spark master and all workers.
     SPARK_WORKER_MEMORY=8G
     SPARK_LOCAL_DIRS=/tmp/spark-local
     SPARK_WORKER_DIR=/tmp/spark-worker
+    
+## History Server Configuration
+
+Optionally you can also run the spark history server. This required that log files are collected from drivers inside
+a shared volume. History collection is enabled per default.
+    
+    SPARK_HISTORY_ENABLED=true
+    SPARK_HISTORY_DIR=/tmp/spark-history
+    SPARK_HISTORY_CLEANER_ENABLED="true"
+    
+## Volume Configuration
+
+Spark uses several directories for temporary data. You can configure the location of these directories and optionally
+mount specific (potentially large) volumes into these directories. If you want to run a Spark history server, the
+history volume is configured by `SPARK_HISTORY_DIR` and has to be a volume shared by all clients (where the driver
+programs are running) and the Spark history server.
+
+    SPARK_LOCAL_DIRS=/tmp/spark-local
+    SPARK_WORKER_DIR=/tmp/spark-worker
+    SPARK_HISTORY_DIR=/tmp/spark-history
+    
 
 ## Hadoop Properties
 
@@ -49,12 +70,36 @@ settings.
     AWS_ACCESS_KEY_ID=
     AWS_SECRET_ACCESS_KEY=
 
-## Running a Spark Standalone Cluster
+    
+# Services
+    
+Per default the following services are available:
+    
+## Spark Master
+    
+    SPARK_MASTER_PORT=7077
+    SPARK_MASTER_WEBUI_PORT=8080
+
+## Spark Worker
+    
+    SPARK_WORKER_WEBUI_PORT=8081
+    
+## Spark History Server
+
+    SPARK_HISTORY_WEBUI_PORT=18080 
+
+## Spark Driver
+    
+    SPARK_DRIVER_WEBUI_PORT=4040
+    
+    
+# Running a Spark Standalone Cluster
 
 The container already contains all components for running a Spark standalone cluster. This can be achieved by using the
-two commands
+three commands
     * master
     * slave
+    * history-server
 
 The docker-compose file contains an example of a complete Spark standalone cluster with a Jupyter Notebook as the
 frontend.

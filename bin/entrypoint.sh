@@ -6,7 +6,7 @@ source /opt/docker/libexec/spark-init.sh
 
 
 start_slave() {
-   	$SPARK_HOME/sbin/start-slave.sh "spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT}" --webui-port ${SPARK_WEBUI_PORT} "$@"
+   	$SPARK_HOME/sbin/start-slave.sh "spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT}" --webui-port ${SPARK_WORKER_WEBUI_PORT} "$@"
     check_java
 }
 
@@ -19,7 +19,13 @@ start_master() {
         export SPARK_MASTER=${SPARK_MASTER="spark://${SPARK_MASTER_HOST}:${SPARK_MASTER_PORT}"}
     fi
 
-    $SPARK_HOME/sbin/start-master.sh --webui-port ${SPARK_WEBUI_PORT} "$@"
+    $SPARK_HOME/sbin/start-master.sh --webui-port ${SPARK_MASTER_WEBUI_PORT} "$@"
+    check_java
+}
+
+
+start_history_server() {
+    $SPARK_HOME/sbin/start-history-server.sh "$@"
     check_java
 }
 
@@ -30,6 +36,9 @@ case "$1" in
         ;;
     "slave")
         start_slave
+        ;;
+    "history-server")
+        start_history_server
         ;;
     *)
         exec $@

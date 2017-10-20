@@ -34,11 +34,26 @@ services:
     expose:
       - 6066
       - 7077
-      - 9090
+      - 8080
     ports:
       - 6066:6066
       - 7077:7077
-      - 9090:9090
+      - 8080:8080
+
+  spark-history:
+    hostname: spark-history
+    container_name: dmx-spark-history
+    image: dimajix/spark:latest
+    command: history-server
+    env_file:
+      - docker-compose.env
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+    expose:
+      - 18080
+    ports:
+      - 18080:18080
 
   spark-slave-1:
     hostname: spark-slave-1
@@ -51,9 +66,9 @@ services:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
     expose:
-      - 9090
+      - 8081
     ports:
-      - 9091:9090
+      - 8081:8081
 
   spark-slave-2:
     hostname: spark-slave-2
@@ -66,9 +81,9 @@ services:
       - http_proxy=${http_proxy}
       - https_proxy=${https_proxy}
     expose:
-      - 9090
+      - 8081
     ports:
-      - 9092:9090
+      - 8082:8081
 
 networks:
   default:
