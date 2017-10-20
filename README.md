@@ -16,6 +16,7 @@ seperation helps to come up with a consistent configuration of all ports, hostna
 
 The following settings configure Spark master and all workers.
 
+    SPARK_MASTER=spark://$SPARK_MASTER_HOST:$SPARK_MASTER_PORT
     SPARK_MASTER_HOST=spark-master
     SPARK_MASTER_PORT=7077
 

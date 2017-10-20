@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+
+# Handle special env vars in case of Kubernetes
+if [[ "${SPARK_MASTER_PORT}" =~ ^([a-zA-Z]+)(://)([-a-zA-Z0-9.]+)(:)([0-9]+) ]]
+then
+    echo "Extracting host and port from Kubernetes environment"
+    export SPARK_MASTER_HOST="${BASH_REMATCH[3]}"
+    export SPARK_MASTER_PORT="${BASH_REMATCH[5]}"
+fi
+
 export SPARK_MASTER_HOST=${SPARK_MASTER_HOST="spark-master"}
 export SPARK_MASTER_PORT=${SPARK_MASTER_PORT=7077}
 export SPARK_MASTER=${SPARK_MASTER="spark://$SPARK_MASTER_HOST:$SPARK_MASTER_PORT"}
