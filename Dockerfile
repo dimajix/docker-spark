@@ -1,8 +1,8 @@
-FROM dimajix/hadoop:2.8.1
+FROM dimajix/hadoop:2.8.3
 MAINTAINER k.kupferschmidt@dimajix.de
 
-ARG BUILD_SPARK_VERSION=2.2.0
-ARG BUILD_ALLUXIO_VERSION=1.5.0
+ARG BUILD_SPARK_VERSION=2.2.1
+ARG BUILD_ALLUXIO_VERSION=1.6.1
 
 USER root
 
@@ -19,7 +19,7 @@ ENV SPARK_HOME=/opt/spark \
     SPARK_DIST_CLASSPATH="$HADOOP_CONF_DIR/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
 
 # Download and install Spark
-RUN curl -sL --retry 3 "http://d3kbcqa49mib13.cloudfront.net/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop.tgz" \
+RUN curl -sL --retry 3 "http://ftp.fau.de/apache/spark/spark-${BUILD_SPARK_VERSION}/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop.tgz" \
     | tar xz -C /opt \
     && ln -s /opt/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop ${SPARK_HOME} \
     && chown -R root:root $SPARK_HOME
