@@ -1,8 +1,7 @@
 FROM dimajix/hadoop:2.8.5
 MAINTAINER k.kupferschmidt@dimajix.de
 
-ARG BUILD_SPARK_VERSION=2.2.1
-ARG BUILD_ALLUXIO_VERSION=1.6.1
+ARG BUILD_SPARK_VERSION=2.2.3
 
 USER root
 
@@ -23,10 +22,6 @@ RUN curl -sL --retry 3 "http://ftp.fau.de/apache/spark/spark-${BUILD_SPARK_VERSI
     | tar xz -C /opt \
     && ln -s /opt/spark-${BUILD_SPARK_VERSION}-bin-without-hadoop ${SPARK_HOME} \
     && chown -R root:root $SPARK_HOME
-
-# Download Alluxio Spark client
-#RUN curl -sL --retry 3 http://downloads.alluxio.org/downloads/files/${BUILD_ALLUXIO_VERSION}/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar \
-#  > /opt/spark/jars/alluxio-${BUILD_ALLUXIO_VERSION}-spark-client-jar-with-dependencies.jar
 
 # Install Python
 RUN apt-get update \
